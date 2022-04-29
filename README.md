@@ -15,9 +15,13 @@ Users should be able to:
   - The `input` field is empty
   - The email address is not formatted correctly
 
+### Original Design
+
+![](./design/desktop-preview.jpg)
+
 ### Links
 
-- Live Site here:
+- Live Site here (work in progress!): https://mmcampbell04.github.io/FeM-LandingPage/
 
 ### Built with
 
