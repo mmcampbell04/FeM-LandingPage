@@ -3,10 +3,155 @@
 :root {
   --bright-red: hsl(12, 88%, 59%);
   --bright-blue: hsl(228, 39%, 23%);
-  --dark-gray: hsl(227, 12%, 61%);
-  --dark-blue: hsl(233, 12%, 13%);
+  --gray-blue: hsl(227, 12%, 61%);
+  --dark-blue: hsl(228, 39%, 23%);
+  --very-dark-blue: hsl(233, 12%, 13%);
   --pale-red: hsl(13, 100%, 96%);
   --light-gray: hsl(0, 0%, 98%);
+}
+
+/* HELPERS */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 80% 1fr;
+}
+
+@media (max-width: 600px) {
+  .hide-for-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .hide-for-desktop {
+    display: none;
+  }
+}
+
+/* NAVBAR */
+
+nav,
+main,
+footer {
+  grid-column: 2/-2;
+}
+
+.navbar {
+  z-index: 10;
+  padding-block: 3em;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* ADD NAVBAR COLOUR ON SCOLL OTHERWISE TRANSPARENT */
+
+.nav-container {
+  grid-column: 2/-2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-menu {
+  position: absolute;
+  width: calc(100vw - 4em);
+  top: 125%;
+  padding: 2em;
+  background: white;
+  z-index: 100;
+  border-radius: 5px;
+  text-align: center;
+  transform: translateX(-150%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.navbar-menu a {
+  color: var(--dark-blue);
+  font-weight: 700;
+}
+
+.navbar-menu a:hover {
+  color: var(--gray-blue);
+}
+
+.navbar-menu li:not(:first-child) {
+  margin-top: 1.5em;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  display: block;
+  background: var(--dark-blue);
+  width: 1.25em;
+  border-radius: 3px;
+  height: 3px;
+  transition: all 0.5s ease-in-out;
+}
+
+.hamburger::before {
+  transform: translateY(-6px);
+}
+
+.hamburger::after {
+  transform: translateY(3px);
+}
+
+.nav-toggle.animate .hamburger {
+  transform: rotate(45deg);
+}
+
+.nav-toggle.animate .hamburger::before {
+  opacity: 0;
+}
+
+.nav-toggle.animate .hamburger::after {
+  transform: translateY(-3px) rotate(-90deg);
+}
+
+/* STYLES WHEN MOBILE MENU IS OPEN */
+
+.navbar-menu.active {
+  transform: translateX(0);
+}
+
+.overlay {
+  position: fixed;
+  display: none;
+  inset: 0 0 0 0;
+  z-index: 5;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.6096813725490196) 31%,
+    rgba(255, 255, 255, 0.19151785714285718) 80%
+  );
+  transition: transform 0.5s ease-in-out;
+}
+
+body.active .overlay {
+  display: block;
+}
+
+body.active {
+  overflow: hidden;
+}
+
+main {
+  margin-top: 12em;
+}
+
+/* buttons */
+
+.btn-cta {
+  background: var(--bright-red);
+  color: var(--light-gray);
+  border-radius: 25px;
+  padding: 0.75em 1.5em;
 }
 
 /* RESETS */
@@ -33,9 +178,11 @@ dd {
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role="list"],
-ol[role="list"] {
+ul,
+ol {
   list-style: none;
+  padding: none;
+  margin: none;
 }
 
 /* Set core root defaults */
@@ -48,13 +195,16 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+  font-size: 100%;
+  font-weight: 300;
   font-family: "Be Vietnam Pro", sans-serif;
   color: var(--dark-gray);
+  overflow: auto;
 }
 
-/* A elements that don't have a class get default styles */
-a:not([class]) {
-  text-decoration-skip-ink: auto;
+a {
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* Make images easier to work with */
@@ -70,6 +220,14 @@ button,
 textarea,
 select {
   font: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
