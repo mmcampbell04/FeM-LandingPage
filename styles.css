@@ -2,19 +2,28 @@
 
 :root {
   --bright-red: hsl(12, 88%, 59%);
-  --bright-blue: hsl(228, 39%, 23%);
-  --gray-blue: hsl(227, 12%, 61%);
   --dark-blue: hsl(228, 39%, 23%);
+  --gray-blue: hsl(227, 12%, 61%);
   --very-dark-blue: hsl(233, 12%, 13%);
   --pale-red: hsl(13, 100%, 96%);
   --light-gray: hsl(0, 0%, 98%);
+}
+
+/* TYPOGRAPHY */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--dark-blue);
 }
 
 /* HELPERS */
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 80% 1fr;
+  grid-template-columns: 1fr 80vw 1fr;
 }
 
 @media (max-width: 600px) {
@@ -29,7 +38,24 @@
   }
 }
 
-/* NAVBAR */
+/* LAYOUTS */
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  background: var(--pale-red);
+  transform: rotate(45deg);
+  border-radius: 0 0 40% 40%;
+  z-index: -2;
+}
+
+body::before {
+  right: 0%;
+  top: -44%;
+  height: 70rem;
+  width: 28rem;
+}
 
 nav,
 main,
@@ -37,13 +63,24 @@ footer {
   grid-column: 2/-2;
 }
 
+main {
+  margin-top: 7em;
+}
+
+header {
+  text-align: center;
+}
+
+/* NAVBAR */
+
 .navbar {
   z-index: 10;
-  padding-block: 3em;
+  padding-block: clamp(4em, 2%, 5em);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  font-size: 0.75rem;
 }
 
 /* ADD NAVBAR COLOUR ON SCOLL OTHERWISE TRANSPARENT */
@@ -55,68 +92,100 @@ footer {
   align-items: center;
 }
 
+.logo {
+  height: 1.5em;
+}
+
 .navbar-menu {
-  position: absolute;
-  width: calc(100vw - 4em);
-  top: 125%;
-  padding: 2em;
-  background: white;
-  z-index: 100;
-  border-radius: 5px;
-  text-align: center;
-  transform: translateX(-150%);
-  transition: transform 0.5s ease-in-out;
+  display: flex;
+  justify-content: center;
+  flex: 0.5 0 auto;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-menu li {
+  padding-right: 2em;
+  font-weight: 300;
 }
 
 .navbar-menu a {
   color: var(--dark-blue);
-  font-weight: 700;
+  font-weight: 300;
 }
 
 .navbar-menu a:hover {
   color: var(--gray-blue);
 }
 
-.navbar-menu li:not(:first-child) {
-  margin-top: 1.5em;
-}
+/* MOBILE ONLY MENU STYLES */
+@media (max-width: 600px) {
+  body::before {
+    height: 27rem;
+    width: 15rem;
+    right: 0%;
+    top: -10%;
+  }
 
-.hamburger,
-.hamburger::before,
-.hamburger::after {
-  content: "";
-  display: block;
-  background: var(--dark-blue);
-  width: 1.25em;
-  border-radius: 3px;
-  height: 3px;
-  transition: all 0.5s ease-in-out;
-}
+  .navbar-menu {
+    position: absolute;
+    flex-direction: column;
+    width: 80vw;
+    top: 125%;
+    padding: 2em;
+    background: white;
+    z-index: 100;
+    border-radius: 5px;
+    text-align: center;
+    transform: translateX(-150%);
+    transition: transform 0.5s ease-in-out;
+  }
 
-.hamburger::before {
-  transform: translateY(-6px);
-}
+  .navbar-menu li:not(:first-child) {
+    margin-top: 1.5em;
+  }
 
-.hamburger::after {
-  transform: translateY(3px);
-}
+  .navbar-menu a {
+    font-weight: 700;
+  }
 
-.nav-toggle.animate .hamburger {
-  transform: rotate(45deg);
-}
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after {
+    content: "";
+    display: block;
+    background: var(--dark-blue);
+    width: 1.25em;
+    border-radius: 3px;
+    height: 3px;
+    transition: all 0.5s ease-in-out;
+  }
 
-.nav-toggle.animate .hamburger::before {
-  opacity: 0;
-}
+  .hamburger::before {
+    transform: translateY(-6px);
+  }
 
-.nav-toggle.animate .hamburger::after {
-  transform: translateY(-3px) rotate(-90deg);
-}
+  .hamburger::after {
+    transform: translateY(3px);
+  }
 
-/* STYLES WHEN MOBILE MENU IS OPEN */
+  .nav-toggle.animate .hamburger {
+    transform: rotate(45deg);
+  }
 
-.navbar-menu.active {
-  transform: translateX(0);
+  .nav-toggle.animate .hamburger::before {
+    opacity: 0;
+  }
+
+  .nav-toggle.animate .hamburger::after {
+    transform: translateY(-3px) rotate(-90deg);
+  }
+
+  /* STYLES WHEN MOBILE MENU IS OPEN */
+
+  .navbar-menu.active {
+    transform: translateX(0);
+  }
 }
 
 .overlay {
@@ -141,10 +210,6 @@ body.active {
   overflow: hidden;
 }
 
-main {
-  margin-top: 12em;
-}
-
 /* buttons */
 
 .btn-cta {
@@ -161,6 +226,10 @@ main {
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+html {
+  height: 100%;
 }
 
 /* Remove default margin */
@@ -192,7 +261,7 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
-  min-height: 100vh;
+  min-height: 100%;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   font-size: 100%;
@@ -200,6 +269,9 @@ body {
   font-family: "Be Vietnam Pro", sans-serif;
   color: var(--dark-gray);
   overflow: auto;
+  /* background-image: url("./design/mobile-design.jpg");
+  background-repeat: none;
+  background-size: cover; */
 }
 
 a {
