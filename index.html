@@ -119,45 +119,96 @@
           </div>
         </div>
       </section>
-
-      <section class="testimonials-slideshow">
+      <section class="testimonials">
         <h2>What they’ve said</h2>
-        <div class="slideshow-container">
-          <div class="slide">
-            <img src="./images/avatar-anisha.png" alt="avatar of ali" />
-            <p>Anisha Li</p>
-            <p>
-              “Manage has supercharged our team’s workflow. The ability to
-              maintain visibility on larger milestones at all times keeps
-              everyone motivated.”
-            </p>
+        <div class="carousel" aria-label="carousel">
+          <input
+            type="radio"
+            checked="checked"
+            name="carousel"
+            title="slide1"
+            class="slider__nav"
+            id="nav1"
+          />
+          <input
+            type="radio"
+            name="carousel"
+            title="slide2"
+            class="slider__nav"
+            id="nav2"
+          />
+          <input
+            type="radio"
+            name="carousel"
+            title="slide3"
+            class="slider__nav"
+            id="nav3"
+          />
+          <input
+            type="radio"
+            name="carousel"
+            title="slide4"
+            class="slider__nav"
+            id="nav4"
+          />
+          <div class="carousel-container">
+            <div class="carousel-slide" id="slide-1">
+              <div class="carousel-img">
+                <img src="./images/avatar-anisha.png" alt="avatar of anisha" />
+              </div>
+              <p>Anisha Li</p>
+              <p>
+                “Manage has supercharged our team’s workflow. The ability to
+                maintain visibility on larger milestones at all times keeps
+                everyone motivated.”
+              </p>
+            </div>
+            <div class="carousel-slide" id="slide-2">
+              <div class="carousel-img">
+                <img src="./images/avatar-ali.png" alt="axatar of ali" />
+              </div>
+
+              <p>Ali Bravo</p>
+              <p>
+                “We have been able to cancel so many other subscriptions since
+                using Manage. There is no more cross-channel confusion and
+                everyone is much more focused.”
+              </p>
+            </div>
+            <div class="carousel-slide" id="slide-3">
+              <div class="carousel-img">
+                <img
+                  src="./images/avatar-richard.png"
+                  alt="avatar of richard"
+                />
+              </div>
+
+              <p>Richard Watts</p>
+              <p>
+                “Manage allows us to provide structure and process. It keeps us
+                organized and focused. I can’t stop recommending them to
+                everyone I talk to!”
+              </p>
+            </div>
+            <div class="carousel-slide" id="slide-4">
+              <div class="carousel-img">
+                <img src="./images/avatar-shanai.png" alt="avatar of shanai" />
+              </div>
+
+              <p>Shanai Gough</p>
+              <p>
+                “Their software allows us to track, manage and collaborate on
+                our projects from anywhere. It keeps the whole team in-sync
+                without being intrusive.”
+              </p>
+            </div>
           </div>
-          <div class="slide">
-            <img src="./images/avatar-anisha.png" alt="avatar of ali" />
-            <p>Ali Bravo</p>
-            <p>
-              “We have been able to cancel so many other subscriptions since
-              using Manage. There is no more cross-channel confusion and
-              everyone is much more focused.”
-            </p>
+          <div class="carousel-controls">
+            <label for="nav1"></label>
+            <label for="nav2"></label>
+            <label for="nav3"></label>
+            <label for="nav4"></label>
           </div>
-          <div class="slide">
-            <img src="./images/avatar-anisha.png" alt="avatar of ali" />
-            <p>Richard Watts</p>
-            <p>
-              “Manage allows us to provide structure and process. It keeps us
-              organized and focused. I can’t stop recommending them to everyone
-              I talk to!” Shanai Gough “Their software allows us to track,
-              manage and collaborate on our projects from anywhere. It keeps the
-              whole team in-sync without being intrusive.”
-            </p>
-          </div>
-        </div>
-        <div class="slideshow-nav">
-          <span class="btn-dot" role="button"></span>
-          <span class="btn-dot" role="button"></span>
-          <span class="btn-dot" role="button"></span>
-          <span class="btn-dot" role="button"></span>
         </div>
 
         <button class="btn-cta">Get Started</button>
