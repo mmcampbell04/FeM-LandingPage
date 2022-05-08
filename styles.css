@@ -31,11 +31,20 @@ h1 {
 }
 
 h2 {
+  color: white;
+  font-size: 2.25rem;
+  line-height: 1.4;
+  text-align: center;
+  grid-area: subtitle;
+  max-width: 20ch;
+}
+
+h3 {
   font-size: clamp(1.55rem, 3vw, 4rem);
   text-align: center;
 }
 
-h3 {
+h4 {
   font-size: clamp(0.875rem, 1.5vw, 2rem);
   background: var(--pale-red);
   display: flex;
@@ -43,8 +52,12 @@ h3 {
 }
 
 @media (min-width: 45em) {
-  h3 {
+  h4 {
     background: none;
+  }
+
+  h2 {
+    text-align: left;
   }
 }
 
@@ -62,7 +75,7 @@ h3 {
 
 .grid {
   display: grid;
-  grid-template-columns: minmax(2em, 1fr) minmax(0px, 75em) minmax(2em, 1fr);
+  grid-template-columns: minmax(2em, 1fr) minmax(0px, 80em) minmax(2em, 1fr);
 }
 
 @media (max-width: 35em) {
@@ -110,8 +123,8 @@ nav {
 .navbar-container {
   grid-column: 2/-2;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
 header {
@@ -126,6 +139,40 @@ main {
 section {
   margin-top: 3em;
   grid-column: 2/-2;
+}
+
+section.cta {
+  grid-column: 1/4;
+  padding: 4em 2em;
+  background: var(--bright-red);
+  background-image: url("./images/bg-simplify-section-mobile.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.cta-wrapper {
+  grid-column: 2/-2;
+  display: grid;
+  grid-template-areas:
+    "subtitle"
+    "button";
+  row-gap: 2em;
+  place-items: center;
+}
+
+@media (min-width: 45em) {
+  section.cta {
+    background-image: url("./images/bg-simplify-section-desktop.svg");
+    background-size: cover;
+  }
+
+  .cta-wrapper {
+    grid-template-areas: "subtitle button";
+  }
+}
+
+footer {
+  background: var(--very-dark-blue);
 }
 
 /* COMPONENTS  */
@@ -143,6 +190,12 @@ section {
 
 .btn-cta:hover {
   opacity: 0.7;
+}
+
+.secondary {
+  background: white;
+  color: var(--bright-red);
+  grid-area: button;
 }
 
 /* background blobs */
@@ -256,6 +309,10 @@ main::before {
   .logo {
     height: 1.25em;
   }
+
+  /* .navbar-container {
+    justify-content: space-between;
+  } */
 
   .navbar-menu {
     position: absolute;
@@ -517,23 +574,30 @@ section.testimonials {
   align-items: center;
 }
 
-.carousel-controls > label {
+label {
   height: 16px;
   aspect-ratio: 1/1;
   border-radius: 100%;
   border: 2px solid var(--bright-red);
-  margin-right: 0.5em;
   cursor: pointer;
   transition: 0.3s;
 }
 
+label:not(:last-child) {
+  margin-right: 0.5em;
+}
+
 .carousel-controls > label:hover,
-.carousel-controls > label:active .carousel-controls > label:checked {
+.carousel-controls > label:active {
   background: var(--bright-red);
 }
 
 input[type="radio"] {
   display: none;
+}
+
+input[type="radio"]:checked + label {
+  background: var(--bright-red);
 }
 
 #nav1:checked ~ .carousel-container > .carousel-slide:nth-child(1) {
@@ -549,6 +613,77 @@ input[type="radio"] {
 
 #nav4:checked ~ .carousel-container > .carousel-slide:nth-child(1) {
   margin-left: -75%;
+}
+
+@media (min-width: 45em) {
+  section.testimonials {
+    height: 45vh;
+    grid-column: 1/4;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .carousel {
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    top: 15%;
+    padding-top: 2em;
+  }
+
+  .carousel-container {
+    margin-top: 5em;
+  }
+
+  .carousel-slide {
+    margin-right: 1em;
+    padding: 0 1.5em 2em 1.5em;
+    width: 10%;
+  }
+
+  #nav1:checked ~ .carousel-container > .carousel-slide:nth-child(1) {
+    margin-left: 8%;
+  }
+
+  #nav2:checked ~ .carousel-container > .carousel-slide:nth-child(1) {
+    margin-left: -3%;
+  }
+  #nav3:checked ~ .carousel-container > .carousel-slide:nth-child(1) {
+    margin-left: -14%;
+  }
+
+  #nav4:checked ~ .carousel-container > .carousel-slide:nth-child(1) {
+    margin-left: -24%;
+  }
+}
+
+@media (min-width: 52em) {
+  .carousel-slide {
+    width: 8%;
+  }
+
+  .carousel-slide img {
+    width: 20%;
+  }
+
+  #nav1:checked ~ .carousel-container > .carousel-slide:nth-child(1) {
+    margin-left: 8%;
+  }
+
+  #nav2:checked ~ .carousel-container > .carousel-slide:nth-child(1) {
+    margin-left: 0%;
+  }
+  #nav3:checked ~ .carousel-container > .carousel-slide:nth-child(1) {
+    margin-left: -8%;
+  }
+
+  #nav4:checked ~ .carousel-container > .carousel-slide:nth-child(1) {
+    margin-left: -16%;
+  }
 }
 
 /* RESETS */
@@ -600,11 +735,6 @@ body {
   font-weight: 300;
   font-family: "Be Vietnam Pro", sans-serif;
   color: var(--gray-blue);
-  overflow: auto;
-  /* overflow-x: hidden; */
-  /* background-image: url("./design/mobile-design.jpg");
-  background-repeat: none;
-  background-size: cover; */
 }
 
 a {
